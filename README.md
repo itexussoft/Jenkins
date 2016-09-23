@@ -139,6 +139,10 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 ```
 #### Install RVM for Jenkins user
 
+To log in as Jenikins user, use the command:
+```bash
+sudo -Hiu jenkins
+```
 Also we need to install RVM for Jenkins user.
 Installing RVM for Jenkins is not different, but we should add `[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"` into `.bashrc` to autorun RVM with Jenkins.
 
@@ -253,6 +257,31 @@ require 'simplecov-rcov'
 SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
 SimpleCov.start 'rails'
 ```
+
+## Configure Jenkins and private repository on BitBucket
+
+Before install `￼Bitbucket Plugin` plugin in `Plugin Manager` on Jenkins.
+
+Generate shh-keys for Jenkins user.
+
+```bash
+sudo -Hiu jenkins
+ssh-keygen -t rsa -b 4096
+```
+List a public key 
+```bash
+cat .ssh/id_rsa.pub 
+```
+
+In `BitBucket settings` select `SSH keys` and `add key`.
+
+![](https://i.imgur.com/2qLHsBr.png)
+
+Enter any suitable lable and insert Jenkins public key under `Key`.
+
+![](https://i.imgur.com/zmtMQON.png)
+
+Now we can add private repository from BitBucket to Jenkins.
 
 ## Conclusion
 
